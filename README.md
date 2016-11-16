@@ -17,10 +17,24 @@ Sometimes it is better to allocate a bunch of objects you need and just reuse th
 ## API
 The API for this is fairly simple and straight forward. You have an `alloc()` method, a `free(object)` method, and a `collect()` method available.
 
+### constructor
+the constructor for an ObjectPool has an optional number of objects you can give it. If you pass a number, it will preallocate that many objects.
+
+```js
+let pool = new ObjectPool();
+console.log(pool.status.totalAllocated);
+// 0
+
+let poolPreAlloc = new ObjectPool(5);
+console.log(pool.status.totalAllocated);
+// 5
+
+```
+
 The following all assume you have created an object pool.
 
 ```js
-let pool = ObjectPool();
+let pool = new ObjectPool();
 ```
 
 ### alloc()
