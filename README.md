@@ -45,3 +45,12 @@ console.log(pointPool.totalAllocated)
 console.log(pointPool.totalFree)
 // 0
 ```
+
+## Why?
+Sometimes you have a lot of objects. Sometimes having those garbage collect causes some sawtooth ugliness
+![ugly sawtooth memory allocation in chrome devtools](http://cl.willsonsmith.com/0h3Y0a2V3Y3t/0tpPQ.png)
+
+### OK but why is this bad?
+Garbage collection can be slow, especially if you're working with a lot of objects.
+Sometimes it is better to allocate a bunch of objects you need and just reuse them.
+[see this dope article](https://www.html5rocks.com/en/tutorials/speed/static-mem-pools/)
