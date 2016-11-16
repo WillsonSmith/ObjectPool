@@ -91,7 +91,6 @@ console.log(pool.status.totalAllocated)
 // 2
 console.log(pool.status.totalFree)
 // 1
-```
 
 pool.collect();
 
