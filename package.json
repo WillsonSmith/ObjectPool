@@ -1,0 +1,34 @@
+{
+  "name": "ObjectPool",
+  "version": "1.0.0",
+  "description": "A class to help manually manage memory in JavaScript",
+  "main": "lib/objectpool.min.js",
+  "author": "Willson Smith",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.7",
+    "babel-preset-shopify": "^15.0.1",
+    "eslint": "^3.10.2",
+    "eslint-loader": "^1.6.1",
+    "eslint-plugin-shopify": "^15.0.3",
+    "mocha": "^3.1.2",
+    "webpack": "^1.13.3"
+  },
+  "eslintConfig": {
+    "extends": "plugin:shopify/esnext",
+    "env": {}
+  },
+  "babel": {
+    "presets": [
+      "shopify"
+    ]
+  },
+  "scripts": {
+    "build": "WEBPACK_ENV=build webpack",
+    "dev": "WEBPACK_ENV=dev webpack --progress --colors --watch",
+    "lint": "eslint . --max-warnings 0",
+    "test": "mocha"
+  },
+  "dependencies": {}
+}
