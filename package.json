@@ -1,7 +1,7 @@
 {
-  "name": "ObjectPool",
+  "name": "object-object-pool",
   "version": "1.0.0",
-  "description": "A class to help manually manage memory in JavaScript",
+  "description": "A class to help manually manage object memory in JavaScript",
   "main": "lib/objectpool.min.js",
   "author": "Willson Smith",
   "license": "MIT",
