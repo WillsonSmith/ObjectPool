@@ -87,6 +87,12 @@ console.log(pool.status.totalFree);
 pool.free(objectTwo); // internally recycles object
 objectTwo = null;
 
+console.log(pool.status.totalAllocated)
+// 2
+console.log(pool.status.totalFree)
+// 1
+```
+
 pool.collect();
 
 console.log(pool.status.totalAllocated)
