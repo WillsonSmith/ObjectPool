@@ -4,48 +4,6 @@
 
 A manual memory management tool for JavaScript.
 
-Examples.
-
-```js
-let pointPool = new ObjectPool();
-let pointOne = pointPool.alloc();
-// {}
-pointOne.x = 5;
-pointTwo.x = 5;
-
-console.log(pointPool.totalAllocated)
-// 1
-console.log(pointPool.totalFree)
-// 0
-
-pointPool.free(pointOne);
-pointOne = null;
-console.log(pointPool.totalAllocated)
-// 1
-console.log(pointPool.totalFree)
-// 1
-```
-
-```js
-let pointPool = new ObjectPool(5);
-let pointOne = pointPool.alloc();
-// {}
-pointOne.x = 5;
-pointTwo.x = 5;
-
-console.log(pointPool.totalAllocated)
-// 5
-console.log(pointPool.totalFree)
-// 4
-
-pointPool.collect();
-
-console.log(pointPool.totalAllocated)
-// 1
-console.log(pointPool.totalFree)
-// 0
-```
-
 ## Why?
 Sometimes you have a lot of objects. Sometimes having those garbage collect causes some sawtooth ugliness
 ![ugly sawtooth memory allocation in chrome devtools](http://cl.willsonsmith.com/0h3Y0a2V3Y3t/0tpPQ.png)
@@ -54,3 +12,65 @@ Sometimes you have a lot of objects. Sometimes having those garbage collect caus
 Garbage collection can be slow, especially if you're working with a lot of objects.
 Sometimes it is better to allocate a bunch of objects you need and just reuse them.
 [see this dope article](https://www.html5rocks.com/en/tutorials/speed/static-mem-pools/)
+
+
+## API
+The API for this is fairly simple and straight forward. You have an `alloc()` method, a `free(object)` method, and a `collect()` method available.
+
+The following all assume you have created an object pool.
+
+```js
+let pool = ObjectPool();
+```
+
+### alloc()
+This will assign `myObject` to be `{}`. You can use this object as you wish.
+When you are done with this obect you can `free` it.
+```js
+console.log(pool.status.totalAllocated)
+// 0
+
+let myObject = pool.alloc();
+// {}
+console.log(pool.status.totalAllocated)
+// 1
+console.log(pool.status.totalFree)
+// 0
+```
+
+### free()
+When you are finished with an object, calling `pool.free(object)` will mark it as free to use again.
+When you do this, you should also mark your reference to the object as `null`.
+
+```js
+let myObject = pool.alloc();
+// {}
+console.log(pool.status.totalAllocated)
+// 1
+console.log(pool.status.totalFree)
+// 0
+pool.free(myObject); // internally recycles object
+myObject = null;
+console.log(pool.status.totalAllocated)
+// 1
+console.log(pool.status.totalFree)
+// 1
+```
+
+### collect()
+`collect()` will remove all _unused_ objects from your pool. If you have allocated 5 objects, and one is in use,
+internally you will have one allocated object and zero free objects. 
+
+```js
+let objectOne = pool.alloc();
+let objectTwo = pool.alloc();
+
+pool.free(objectTwo); // internally recycles object
+objectTwo = null;
+
+console.log(pool.status.totalAllocated)
+// 1
+console.log(pool.status.totalFree)
+// 0
+```
+
