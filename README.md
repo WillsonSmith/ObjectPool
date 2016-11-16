@@ -1,4 +1,6 @@
-# Object Object Pool
+# Object Object Pool 
+
+[![Build Status](https://travis-ci.org/WillsonSmith/ObjectPool.svg?branch=master)](https://travis-ci.org/WillsonSmith/ObjectPool)
 
 A manual memory management tool for JavaScript.
 
