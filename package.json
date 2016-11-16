@@ -5,6 +5,10 @@
   "main": "lib/objectpool.min.js",
   "author": "Willson Smith",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/willsonsmith/objectpool"
+  },
   "devDependencies": {
     "babel-core": "^6.18.2",
     "babel-loader": "^6.2.7",
